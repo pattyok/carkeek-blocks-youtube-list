@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "carkeek-blocks/youtube-embed",
+  "version": "0.1.0",
+  "title": "Youtube Embeds",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Display a List of Youtube Videos.",
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "keywords": [
+    "youtube",
+    "carousel",
+    "videos"
+  ],
+  "textdomain": "carkeek-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./script.js",
+  "attributes": {
+    "taxTermsSelected": {
+      "type": "string",
+      "default": ""
+    },
+    "taxQueryType": {
+      "type": "string",
+      "default": "AND"
+    },
+    "displayAs": {
+      "type": "string",
+      "default": "grid"
+    },
+    "sortBy": {
+      "type": "string",
+      "default": "title"
+    },
+    "order": {
+      "type": "string",
+      "default": "ASC"
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "columnsMobile": {
+      "type": "number",
+      "default": 1
+    },
+    "columnsTablet": {
+      "type": "number",
+      "default": 3
+    },
+    "autoPlay": {
+      "type": "boolean",
+      "default": true
+    },
+    "autoPlaySpeed": {
+      "type": "number",
+      "default": 3000
+    },
+    "context": {
+      "type": "string",
+      "default": "view"
+    }
+  }
+}

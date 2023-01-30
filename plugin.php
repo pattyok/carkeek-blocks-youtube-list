@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: Carkeek Blocks - Custom Link List
- * Plugin URI: https://github.com/pattyok/carkeek-blocks-custom-links
- * GitHub Plugin URI: pattyok/carkeek-blocks-custom-links
+ * Plugin Name: Carkeek Blocks - YouTube Lists
+ * Plugin URI: https://github.com/pattyok/carkeek-blocks-youtube-list
+ * GitHub Plugin URI: pattyok/carkeek-blocks-youtube-list
  * Requires PHP: 7.0
  * Requires at least: 5.6
  * Primary Branch: main
- * Description: A custom post type and a block for creating and managing lists of links.
+ * Description: A custom post type and a block for embed a group of YouTube videos and loading them --fast!
  * Author: Patty O'Hara
  * Version: 1.0.0
  * Author URI https://carkeekstudios.com/
@@ -17,34 +17,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'CarkeekBlocksCL' ) ) :
+if ( ! class_exists( 'CarkeekBlocksYT' ) ) :
 	/**
-	 * Main CarkeekBlocksCL Class.
+	 * Main CarkeekBlocksYT Class.
 	 *
 	 * @since 1.0
 	 */
-	final class CarkeekBlocksCL {
+	final class CarkeekBlocksYT {
 		/**
 		 * The plugin's instance
 		 *
-		 * @var CarkeekBlocksCL the main var
+		 * @var CarkeekBlocksYT the main var
 		 * @since 1.0
 		 */
 
 		private static $instance;
 
 		/**
-		 * Main CarkeekBlocksCL instance
+		 * Main CarkeekBlocksYT instance
 		 *
 		 * Insures only one instance exists. Also prevents needing to define globals all around.
 		 *
 		 * @since 1.0.0
 		 * @static
-		 * @return object|CarkeekBlocksCL
+		 * @return object|CarkeekBlocksYT
 		 */
 		public static function instance() {
 			if ( ! isset( self::$instance ) && ! ( self::$instance instanceof CarkeekBLocks ) ) {
-				self::$instance = new CarkeekBlocksCL();
+				self::$instance = new CarkeekBlocksYT();
 				self::$instance->setup_constants();
 				self::$instance->init();
 				self::$instance->asset_suffix();
@@ -91,13 +91,13 @@ if ( ! class_exists( 'CarkeekBlocksCL' ) ) :
 			$plugin_data    = get_file_data( __FILE__, array( 'Version' => 'Version' ), false );
 			$plugin_version = $plugin_data['Version'];
 
-			$this->define( 'CARKEEKBLOCKS_CL_DEBUG', false );
-			$this->define( 'CARKEEKBLOCKS_CL_VERSION', $plugin_version );
-			$this->define( 'CARKEEKBLOCKS_CL_HAS_PRO', false );
-			$this->define( 'CARKEEKBLOCKS_CL_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-			$this->define( 'CARKEEKBLOCKS_CL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-			$this->define( 'CARKEEKBLOCKS_CL_PLUGIN_FILE', __FILE__ );
-			$this->define( 'CARKEEKBLOCKS_CL_PLUGIN_BASE', plugin_basename( __FILE__ ) );
+			$this->define( 'CARKEEKBLOCKS_YT_DEBUG', false );
+			$this->define( 'CARKEEKBLOCKS_YT_VERSION', $plugin_version );
+			$this->define( 'CARKEEKBLOCKS_YT_HAS_PRO', false );
+			$this->define( 'CARKEEKBLOCKS_YT_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+			$this->define( 'CARKEEKBLOCKS_YT_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+			$this->define( 'CARKEEKBLOCKS_YT_PLUGIN_FILE', __FILE__ );
+			$this->define( 'CARKEEKBLOCKS_YT_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 		}
 
 		/**
@@ -120,8 +120,8 @@ if ( ! class_exists( 'CarkeekBlocksCL' ) ) :
 		 * @return void
 		 */
 		private function includes() {
-			require_once CARKEEKBLOCKS_CL_PLUGIN_DIR . 'includes/class-carkeekblocks-cl-register.php'; // phpcs:ignore
-			require_once CARKEEKBLOCKS_CL_PLUGIN_DIR . 'includes/class-carkeekblocks-cl-custompost.php'; // phpcs:ignore
+			require_once CARKEEKBLOCKS_YT_PLUGIN_DIR . 'includes/class-carkeekblocks-yt-register.php'; // phpcs:ignore
+			require_once CARKEEKBLOCKS_YT_PLUGIN_DIR . 'includes/class-carkeekblocks-yt-custompost.php'; // phpcs:ignore
 		}
 
 		/**
@@ -140,10 +140,10 @@ if ( ! class_exists( 'CarkeekBlocksCL' ) ) :
 		 * @since 1.0.0
 		 */
 		public function asset_suffix() {
-			if ( true === CARKEEKBLOCKS_CL_DEBUG ) {
-				define( 'CARKEEKBLOCKS_CL_ASSET_SUFFIX', null );
+			if ( true === CARKEEKBLOCKS_YT_DEBUG ) {
+				define( 'CARKEEKBLOCKS_YT_ASSET_SUFFIX', null );
 			} else {
-				define( 'CARKEEKBLOCKS_CL_ASSET_SUFFIX', '.min' );
+				define( 'CARKEEKBLOCKS_YT_ASSET_SUFFIX', '.min' );
 			}
 		}
 
@@ -156,14 +156,14 @@ if ( ! class_exists( 'CarkeekBlocksCL' ) ) :
 		 */
 		public function asset_source( $type = 'js', $directory = null ) {
 			if ( 'js' !== $type ) {
-				return CARKEEKBLOCKS_CL_PLUGIN_URL . 'build/css/' . $directory;
+				return CARKEEKBLOCKS_YT_PLUGIN_URL . 'build/css/' . $directory;
 			}
 
-			if ( true === CARKEEKBLOCKS_CL_DEBUG ) {
-				return CARKEEKBLOCKS_CL_PLUGIN_URL . 'src/' . $type . '/' . $directory;
+			if ( true === CARKEEKBLOCKS_YT_DEBUG ) {
+				return CARKEEKBLOCKS_YT_PLUGIN_URL . 'src/' . $type . '/' . $directory;
 			}
 
-			return CARKEEKBLOCKS_CL_PLUGIN_URL . 'build/' . $type . '/' . $directory;
+			return CARKEEKBLOCKS_YT_PLUGIN_URL . 'build/' . $type . '/' . $directory;
 		}
 
 		/**
@@ -174,7 +174,7 @@ if ( ! class_exists( 'CarkeekBlocksCL' ) ) :
 		 * @return void
 		 */
 		public function load_textdomain() {
-			load_plugin_textdomain( 'block-options', false, dirname( plugin_basename( CARKEEKBLOCKS_CL_PLUGIN_DIR ) ) . '/languages/' );
+			load_plugin_textdomain( 'block-options', false, dirname( plugin_basename( CARKEEKBLOCKS_YT_PLUGIN_DIR ) ) . '/languages/' );
 		}
 
 		/**
@@ -202,13 +202,13 @@ endif;
  * Use this function like you would a global variable, except without needing
  * to declare the global.
  *
- * Example: <?php $blockopts = CarkeekBlocksCL(); ?>
+ * Example: <?php $blockopts = CarkeekBlocksYT(); ?>
  *
  * @since 1.0
- * @return object|CarkeekBlocksCL The one true EditorsKit Instance.
+ * @return object|CarkeekBlocksYT The one true EditorsKit Instance.
  */
 function carkeekblocks_CL() {
-	return CarkeekBlocksCL::instance();
+	return CarkeekBlocksYT::instance();
 }
 
 // Get Plugin Running.

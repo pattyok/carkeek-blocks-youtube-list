@@ -1,0 +1,28 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+@import './shared/_columns_grid.scss';
+
+.wp-block-carkeek-blocks-youtube-embed {
+	 &.slider-carousel {
+		--slick-arrow-pos: 0;
+		&.slick-initialized .slick-track {
+			gap: 1rem;
+			.slick-slide>div {
+				width: 100%;
+			}
+		}
+
+	 }
+	 & .embed-title, .embed-description {
+		font-size: var(--wp--preset--font-size--small);
+	}
+	& .embed-title {
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		margin-top: 0.5rem;
+	}
+}

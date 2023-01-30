@@ -18,12 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class CarkeekBlocksCL_Block_Register {
+class CarkeekBlocksYT_Block_Register {
 
 	/**
 	 * This plugin's instance.
 	 *
-	 * @var CarkeekBlocksCL_Block_Register
+	 * @var CarkeekBlocksYT_Block_Register
 	 */
 	private static $instance;
 
@@ -32,7 +32,7 @@ class CarkeekBlocksCL_Block_Register {
 	 */
 	public static function register() {
 		if ( null === self::$instance ) {
-			self::$instance = new CarkeekBlocksCL_Block_Register();
+			self::$instance = new CarkeekBlocksYT_Block_Register();
 		}
 	}
 
@@ -60,21 +60,15 @@ class CarkeekBlocksCL_Block_Register {
 	 * @see https://developer.wordpress.org/reference/functions/register_block_type/
 	 */
 	public function create_block_carkeek_blocks_block_init() {
-		error_log("registering block");
 		$dir = plugin_dir_path( dirname( __FILE__ ) );
 
 		/** Dynamic Blocks */
 		$block = register_block_type(
-			"$dir/build/custom-links",
-			array(
-				'render_callback' => array( 'CarkeekBlocksCL_CustomPost', 'carkeek_blocks_render_custom_linklist' ),
-			)
+			"$dir/build/yt-embed"
 		);
-
-		error_log(print_r($block, true));
 
 	}
 
 }
 
-CarkeekBlocksCL_Block_Register::register();
+CarkeekBlocksYT_Block_Register::register();

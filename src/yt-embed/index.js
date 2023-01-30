@@ -28,7 +28,7 @@ import icons from './icons';
  */
  registerBlockType(metadata, {
     icon: {
-        src: icons.linkList,
+        src: icons.video,
     },
     edit: edit,
 });

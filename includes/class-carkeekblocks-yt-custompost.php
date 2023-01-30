@@ -4,7 +4,7 @@
  *
  * @package CarkeekSiteBlocks
  * @author  Patty O'Hara
- * @link    https://carkeekstudios.com
+ * @Embed    https://carkeekstudios.com
  * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -18,13 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class CarkeekBlocksCL_CustomPost {
+class CarkeekBlocksYT_CustomPost {
 
 
 	/**
 	 * This plugin's instance.
 	 *
-	 * @var CarkeekBlocksCL_CustomPost
+	 * @var CarkeekBlocksYT_CustomPost
 	 */
 	private static $instance;
 
@@ -33,7 +33,7 @@ class CarkeekBlocksCL_CustomPost {
 	 */
 	public static function register() {
 		if ( null === self::$instance ) {
-			self::$instance = new CarkeekBlocksCL_CustomPost();
+			self::$instance = new CarkeekBlocksYT_CustomPost();
 		}
 	}
 
@@ -66,31 +66,31 @@ class CarkeekBlocksCL_CustomPost {
 	 * The Constructor.
 	 */
 	private function __construct() {
-		add_action( 'init', array( $this, 'carkeek_blocks_register_customlinks' ) );
+		add_action( 'init', array( $this, 'carkeek_blocks_register_customEmbeds' ) );
 		add_filter( 'acf/settings/load_json', array( $this, 'json_load_point' ) );
 	}
 	/**
 	 * Register post type - TODO Admin Screen whether to activate or not
 	 */
-	public function carkeek_blocks_register_customlinks() {
-		if ( ! post_type_exists( 'custom_link' ) ) {
+	public function carkeek_blocks_register_customEmbeds() {
+		if ( ! post_type_exists( 'yt_embed' ) ) {
 			$labels = array(
-				'name'                  => _x( 'Custom Links', 'Post Type General Name', 'text_domain' ),
-				'singular_name'         => _x( 'Custom Link', 'Post Type Singular Name', 'text_domain' ),
-				'menu_name'             => __( 'Custom Link', 'text_domain' ),
-				'name_admin_bar'        => __( 'Custom Link', 'text_domain' ),
-				'archives'              => __( 'Link Archives', 'text_domain' ),
-				'attributes'            => __( 'Link Attributes', 'text_domain' ),
-				'parent_item_colon'     => __( 'Parent Link:', 'text_domain' ),
-				'all_items'             => __( 'All Links', 'text_domain' ),
-				'add_new_item'          => __( 'Add New Link', 'text_domain' ),
+				'name'                  => _x( 'YouTube Embeds', 'Post Type General Name', 'text_domain' ),
+				'singular_name'         => _x( 'YouTube Embed', 'Post Type Singular Name', 'text_domain' ),
+				'menu_name'             => __( 'YouTube Embed', 'text_domain' ),
+				'name_admin_bar'        => __( 'YouTube Embed', 'text_domain' ),
+				'archives'              => __( 'Embed Archives', 'text_domain' ),
+				'attributes'            => __( 'Embed Attributes', 'text_domain' ),
+				'parent_item_colon'     => __( 'Parent Embed:', 'text_domain' ),
+				'all_items'             => __( 'All Embeds', 'text_domain' ),
+				'add_new_item'          => __( 'Add New Embed', 'text_domain' ),
 				'add_new'               => __( 'Add New', 'text_domain' ),
-				'new_item'              => __( 'New Link', 'text_domain' ),
-				'edit_item'             => __( 'Edit Link', 'text_domain' ),
-				'update_item'           => __( 'Update Link', 'text_domain' ),
-				'view_item'             => __( 'View Link', 'text_domain' ),
-				'view_items'            => __( 'View Links', 'text_domain' ),
-				'search_items'          => __( 'Search Link', 'text_domain' ),
+				'new_item'              => __( 'New Embed', 'text_domain' ),
+				'edit_item'             => __( 'Edit Embed', 'text_domain' ),
+				'update_item'           => __( 'Update Embed', 'text_domain' ),
+				'view_item'             => __( 'View Embed', 'text_domain' ),
+				'view_items'            => __( 'View Embeds', 'text_domain' ),
+				'search_items'          => __( 'Search Embed', 'text_domain' ),
 				'not_found'             => __( 'Not found', 'text_domain' ),
 				'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
 				'featured_image'        => __( 'Featured Image', 'text_domain' ),
@@ -99,14 +99,14 @@ class CarkeekBlocksCL_CustomPost {
 				'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
 				'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
 				'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
-				'items_list'            => __( 'Links list', 'text_domain' ),
-				'items_list_navigation' => __( 'Links list navigation', 'text_domain' ),
+				'items_list'            => __( 'Embeds list', 'text_domain' ),
+				'items_list_navigation' => __( 'Embeds list navigation', 'text_domain' ),
 				'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
 			);
 
 			$args      = array(
-				'label'               => __( 'Custom Link', 'wp-rig' ),
-				'description'         => __( 'Add Custom Links to create dynamic lists of links', 'wp-rig' ),
+				'label'               => __( 'YouTube Embed', 'wp-rig' ),
+				'description'         => __( 'Add YouTube Embeds to create dynamic lists of Embeds', 'wp-rig' ),
 				'labels'              => $labels,
 				'supports'            => array( 'title', 'page-attributes' ),
 				'hierarchical'        => false,
@@ -114,7 +114,7 @@ class CarkeekBlocksCL_CustomPost {
 				'show_ui'             => true,
 				'show_in_menu'        => true,
 				'menu_position'       => 10,
-				'menu_icon'           => 'dashicons-admin-links',
+				'menu_icon'           => 'dashicons-video-alt3',
 				'show_in_admin_bar'   => false,
 				'show_in_nav_menus'   => false,
 				'can_export'          => true,
@@ -122,15 +122,15 @@ class CarkeekBlocksCL_CustomPost {
 				'exclude_from_search' => true,
 				'publicly_queryable'  => false,
 				'show_in_rest'        => true,
-				'rest_base'           => 'custom-links',
+				'rest_base'           => 'yt-embeds',
 			);
-			$post_type = register_post_type( 'custom_link', $args );
+			$post_type = register_post_type( 'yt_embed', $args );
 		}
 
 		$labels = array(
-			'name'          => _x( 'Link List Categories', 'Taxonomy General Name', 'wp-rig' ),
-			'singular_name' => _x( 'Link List Category', 'Taxonomy Singular Name', 'wp-rig' ),
-			'menu_name'     => __( 'Link List Categories', 'wp-rig' ),
+			'name'          => _x( 'Embed Categories', 'Taxonomy General Name', 'wp-rig' ),
+			'singular_name' => _x( 'Embed Category', 'Taxonomy Singular Name', 'wp-rig' ),
+			'menu_name'     => __( 'Embed Categories', 'wp-rig' ),
 		);
 		$args   = array(
 			'labels'            => $labels,
@@ -142,17 +142,16 @@ class CarkeekBlocksCL_CustomPost {
 			'show_tagcloud'     => true,
 			'show_in_rest'      => true,
 		);
-		register_taxonomy( 'link_list', array( 'custom_link' ), $args );
+		register_taxonomy( 'embed_cat', array( 'yt_embed' ), $args );
 
 	}
 
 
-	/** load our acf-json for the custom links */
+	/** load our acf-json for the YouTube Embeds */
 	function json_load_point( $paths ) {
 
 		// append path
 		$paths[] = plugin_dir_path( __DIR__ ) . 'acf-json';
-		error_log(print_r($paths, true));
 		// return
 		return $paths;
 
@@ -173,34 +172,34 @@ class CarkeekBlocksCL_CustomPost {
 	}
 
 	/**
-	 * Buildt the custom link
+	 * Buildt the YouTube Embed
 	 *
-	 * @param object  $link link post type object.
+	 * @param object  $Embed Embed post type object.
 	 * @param boolean $collapse_title whether the title is collapsible.
 	 */
-	public static function make_custom_link( $link, $collapse_title = false ) {
+	public static function make_custom_Embed( $Embed, $collapse_title = false ) {
 
-		$href  = get_field( 'cl_external_link', $link->ID );
-		$notes = get_field( 'cl_notes', $link->ID );
+		$href  = get_field( 'cl_external_Embed', $Embed->ID );
+		$notes = get_field( 'cl_notes', $Embed->ID );
 		if ( ! empty( $href ) ) {
-			$link_type = 'external';
+			$Embed_type = 'external';
 		} else {
-			$href = get_field( 'cl_pdf_link', $link->ID );
+			$href = get_field( 'cl_pdf_Embed', $Embed->ID );
 			if ( ! empty( $href ) ) {
-				$link_type = 'pdf';
+				$Embed_type = 'pdf';
 			} else {
-				$href      = get_field( 'cl_page_link', $link->ID );
-				$link_type = 'page';
+				$href      = get_field( 'cl_page_Embed', $Embed->ID );
+				$Embed_type = 'page';
 			}
 		}
-		$target = ( 'external' === $link_type || 'pdf' === $link_type ) ? 'target="_blank"' : '';
+		$target = ( 'external' === $Embed_type || 'pdf' === $Embed_type ) ? 'target="_blank"' : '';
 		if ( empty( $href ) && true == $collapse_title ) {
-			$item = self::make_accordion_panel( $link->post_title, $notes );
+			$item = self::make_accordion_panel( $Embed->post_title, $notes );
 		} else {
 			if ( empty( $href ) ) {
-				$item = '<div class="ck-custom-list-title">' . $link->post_title . '</div>';
+				$item = '<div class="ck-custom-list-title">' . $Embed->post_title . '</div>';
 			} else {
-				$item = '<a class="ck-custom-list-title" href="' . esc_url( $href ) . '" ' . esc_attr( $target ) . '>' . $link->post_title . '</a>';
+				$item = '<a class="ck-custom-list-title" href="' . esc_url( $href ) . '" ' . esc_attr( $target ) . '>' . $Embed->post_title . '</a>';
 			}
 			if ( ! empty( $notes ) ) {
 				$item .= '<div class="ck-custom-list-notes">' . $notes . '</div>';
@@ -211,17 +210,17 @@ class CarkeekBlocksCL_CustomPost {
 	}
 
 	/**
-	 * Render Custom Link Lists
+	 * Render YouTube Embed Lists
 	 *
 	 * @param array $attributes Attributes passed from the block.
 	 */
-	public static function carkeek_blocks_render_custom_linklist( $attributes ) {
+	public static function carkeek_blocks_render_custom_Embedlist( $attributes ) {
 		if ( empty( $attributes['listSelected'] ) ) {
 			return;
 		}
 		$args      = array(
 			'numberposts' => -1,
-			'post_type'   => 'custom_link',
+			'post_type'   => 'custom_Embed',
 			'order'       => $attributes['order'],
 			'post_status' => 'publish',
 			'orderby'     => $attributes['sortBy'],
@@ -230,23 +229,23 @@ class CarkeekBlocksCL_CustomPost {
 
 		// first get all posts with no sub cat selected.
 
-		$subcats           = get_term_children( $attributes['listSelected'], 'link_list' );
+		$subcats           = get_term_children( $attributes['listSelected'], 'Embed_list' );
 		$args['tax_query'] = array(
 			'relation' => 'AND',
 			array(
-				'taxonomy' => 'link_list',
+				'taxonomy' => 'Embed_list',
 				'field'    => 'term_id',
 				'terms'    => explode( ',', $attributes['listSelected'] ),
 			),
 			array(
-				'taxonomy' => 'link_list',
+				'taxonomy' => 'Embed_list',
 				'field'    => 'term_id',
 				'terms'    => $subcats,
 				'operator' => 'NOT IN',
 			),
 		);
 
-		$links      = get_posts( $args );
+		$Embeds      = get_posts( $args );
 		$list_style = '';
 		$data_atts  = array(
 			'accordion' => '',
@@ -266,39 +265,39 @@ class CarkeekBlocksCL_CustomPost {
 			$list_style .= ' is-style-content';
 		}
 
-		$block_content = '<div class="wp-block-carkeek-custom-link-list' . esc_attr( $list_style ) . '"><div ' . esc_attr( $data_atts['accordion'] ) . '>';
+		$block_content = '<div class="wp-block-carkeek-custom-Embed-list' . esc_attr( $list_style ) . '"><div ' . esc_attr( $data_atts['accordion'] ) . '>';
 
 		if ( ! empty( $attributes['headline'] ) ) {
 			$tag_name       = 'h' . $attributes['headlineLevel'];
 			$block_content .= '<' . $tag_name . ' class="ck-custom-headline">' . $attributes['headline'] . '</' . $tag_name . '>';
 		}
 
-		if ( ! empty( $links ) ) {
+		if ( ! empty( $Embeds ) ) {
 			$block_content .= '<ul class="ck-custom-list no-bullets">';
-			foreach ( $links as $link ) {
-				$block_content .= self::make_custom_link( $link, $attributes['makeTitlesCollapsible'] );
+			foreach ( $Embeds as $Embed ) {
+				$block_content .= self::make_custom_Embed( $Embed, $attributes['makeTitlesCollapsible'] );
 			}
 			$block_content .= '</ul>';
 		}
 
 		if ( ! empty( $subcats ) ) {
 			foreach ( $subcats as $cat ) {
-				$term                   = get_term( $cat, 'link_list' );
+				$term                   = get_term( $cat, 'Embed_list' );
 				$post_args['tax_query'] = array(
 					array(
-						'taxonomy' => 'link_list',
+						'taxonomy' => 'Embed_list',
 						'field'    => 'term_id',
 						'terms'    => explode( ',', $cat ),
 					),
 				);
-				$sub_links              = get_posts( $post_args );
-				if ( ! empty( $sub_links ) ) {
+				$sub_Embeds              = get_posts( $post_args );
+				if ( ! empty( $sub_Embeds ) ) {
 					$list_style = '';
 
 					$block_content .= '<div class="ck-custom-list-label" ' . esc_attr( $data_atts['header'] ) . '>' . $term->name . '</div>';
 					$block_content .= '<div class="ck-custom-list" ' . esc_attr( $data_atts['panel'] ) . '><ul class="no-bullets">';
-					foreach ( $sub_links as $sub ) {
-						$block_content .= self::make_custom_link( $sub, $attributes['makeTitlesCollapsible'] );
+					foreach ( $sub_Embeds as $sub ) {
+						$block_content .= self::make_custom_Embed( $sub, $attributes['makeTitlesCollapsible'] );
 					}
 					$block_content .= '</ul></div>';
 				}
@@ -314,6 +313,6 @@ class CarkeekBlocksCL_CustomPost {
 
 }
 
-CarkeekBlocksCL_CustomPost::register();
+CarkeekBlocksYT_CustomPost::register();
 
 
