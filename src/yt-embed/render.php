@@ -1,7 +1,7 @@
 <?php
 /** Layout template for the youtube embeds */
 
-$number = 'carousel' === $attributes['displayAs'] && 'edit' === $attributes['context'] ? $attributes['columns'] : -1;
+$number = 'carousel' === $attributes['displayAs'] && 'edit' === $attributes['context'] ? $attributes['columns'] : $attributes['postsPerPage'];
 
 $args = array(
 	'numberposts' => $number,
@@ -24,7 +24,7 @@ if ( ! empty( $attributes['taxTermsSelected'] ) ) {
 
 $embeds     = get_posts( $args );
 $data_attrs = '';
-if ( $attributes['displayAs'] == 'grid' || $attributes['context'] == 'edit') {
+if ( $attributes['displayAs'] == 'grid' || $attributes['context'] == 'edit' ) {
 	$wrapper_classes = 'ck-columns-grid has-' . $attributes['columns'] . '-columns has-' . $attributes['columnsTablet'] . '-columns-tablet has-' . $attributes['columnsMobile'] . '-columns-mobile';
 } else {
 	$wrapper_classes = 'slider-carousel';
@@ -51,15 +51,21 @@ if ( $attributes['displayAs'] == 'grid' || $attributes['context'] == 'edit') {
 		}
 
 		if ( ! empty( $yt_id ) ) {
+			?>
+			<div class="yt-embed"><lite-youtube
+				videotitle="<?php echo esc_html( $embed->post_title ); ?>"
+				videoid="<?php echo esc_attr( $yt_id ); ?>"
+			></lite-youtube>'
+			<?php if ( true === $attributes['showTitle'] ) : ?>
 
-			echo '<div class="yt-embed"><lite-youtube
-						videotitle="' . $embed->post_title . '"
-						videoid="' . $yt_id . '"
-					></lite-youtube>
-					<p class="embed-title">' . $embed->post_title . '</p>' . $description . '
-					</div>';
+					<p class="embed-title"><?php echo esc_html( $embed->post_title ); ?></p>
+			<?php endif; ?>
+			<?php if ( true === $attributes['showDescription'] ) : ?>
+				<?php echo wp_kses_post( $description ); ?>
+			<?php endif; ?>
+					</div>
 
-
+			<?php
 		}
 	}
 	?>

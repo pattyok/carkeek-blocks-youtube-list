@@ -33,7 +33,10 @@ function CustomListArchiveEdit( props ) {
 		columnsTablet,
 		columnsMobile,
 		autoPlay,
-		autoPlaySpeed
+		autoPlaySpeed,
+		postsPerPage,
+		showTitle,
+		showDescription
     } = attributes;
 
     let options = [];
@@ -113,6 +116,16 @@ function CustomListArchiveEdit( props ) {
                     })
                 }
             />
+			<RangeControl
+						label={__("Limit Results", "carkeek-blocks")}
+						help={__("Limit the number of results to show, select -1 to show all.", "carkeek-blocks")}
+						value={postsPerPage}
+						onChange={postsPerPage =>
+							setAttributes({ postsPerPage })
+						}
+						min={-1}
+						max={20}
+					/>
                  <RangeControl
 						label={__("Columns", "carkeek-blocks")}
 						value={columns}
@@ -163,6 +176,22 @@ function CustomListArchiveEdit( props ) {
                         }
 				</PanelBody>
 			)}
+			<PanelBody title={__("Item Layout", "carkeek-blocks")}>
+				<ToggleControl
+					label="Show Item Title"
+					checked={ showTitle }
+					onChange={value =>
+						setAttributes({ showTitle: value })
+					}
+				/>
+				<ToggleControl
+					label="Show Item Description"
+					checked={ showDescription }
+					onChange={value =>
+						setAttributes({ showDescription: value })
+					}
+				/>
+			</PanelBody>
         </InspectorControls>
     );
 
@@ -203,7 +232,7 @@ export default withSelect((select, props) => {
     const { attributes } = props;
     const { getEntityRecords } = select("core");
     const { taxTermsSelected, order, sortBy } = attributes;
-    const lists = getEntityRecords('taxonomy', listTax, { per_page: -1, parent: 0, orderby: 'name', order: 'asc' } );
+    const lists = getEntityRecords('taxonomy', listTax, { per_page: -1, orderby: 'name', order: 'asc' } );
 
 
     return {

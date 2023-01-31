@@ -43,6 +43,10 @@
       "type": "string",
       "default": "ASC"
     },
+    "postsPerPage": {
+      "type": "number",
+      "default": 6
+    },
     "columns": {
       "type": "number",
       "default": 3
@@ -66,6 +70,14 @@
     "context": {
       "type": "string",
       "default": "view"
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDescription": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
