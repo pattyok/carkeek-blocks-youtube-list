@@ -9,7 +9,11 @@
   "description": "Display a List of Youtube Videos.",
   "supports": {
     "html": false,
-    "anchor": true
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ]
   },
   "keywords": [
     "youtube",
@@ -78,6 +82,10 @@
     "showDescription": {
       "type": "boolean",
       "default": true
+    },
+    "align": {
+      "type": "string",
+      "default": ""
     }
   }
 }

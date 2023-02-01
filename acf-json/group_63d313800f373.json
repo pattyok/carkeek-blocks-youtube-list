@@ -1,0 +1,62 @@
+{
+    "key": "group_63d313800f373",
+    "title": "YouTube Embeds",
+    "fields": [
+        {
+            "key": "field_63d3144af8846",
+            "label": "Embed Link",
+            "name": "yt_embed_oembed",
+            "aria-label": "",
+            "type": "oembed",
+            "instructions": "<p><strong>IMPORTANT<\/strong> The embed url should be formatted like: https:\/\/www.youtube.com\/watch?v=bDgiWiDujnM<\/p>\r\n<p>\r\nThe viewer currently only supports YouTube Links - if you are using another video hosting service, contact your developer. <\/p>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "width": "",
+            "height": ""
+        },
+        {
+            "key": "field_63d313818220f",
+            "label": "Description",
+            "name": "yt_embed_description",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "yt_embed"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1674782820
+}
