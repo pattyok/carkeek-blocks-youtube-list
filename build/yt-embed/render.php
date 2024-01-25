@@ -55,7 +55,7 @@ if ( $attributes['displayAs'] == 'grid' || $attributes['context'] == 'edit' ) {
 			<div class="yt-embed"><lite-youtube
 				videotitle="<?php echo esc_html( $embed->post_title ); ?>"
 				videoid="<?php echo esc_attr( $yt_id ); ?>"
-			></lite-youtube>'
+			></lite-youtube>
 			<?php if ( true === $attributes['showTitle'] ) : ?>
 
 					<p class="embed-title"><?php echo esc_html( $embed->post_title ); ?></p>

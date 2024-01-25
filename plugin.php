@@ -8,7 +8,7 @@
  * Primary Branch: main
  * Description: A custom post type and a block for embed a group of YouTube videos and loading them --fast!
  * Author: Patty O'Hara
- * Version: 1.1.01
+ * Version: 1.1.02
  * Author URI https://carkeekstudios.com/
  * Text Domain: carkeek-blocks
  */
@@ -207,7 +207,7 @@ endif;
  * @since 1.0
  * @return object|CarkeekBlocksYT The one true EditorsKit Instance.
  */
-function carkeekblocks_CL() {
+function carkeekblocks_YT() {
 	return CarkeekBlocksYT::instance();
 }
 
@@ -216,5 +216,5 @@ if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 	// Get Plugin Running. Load on plugins_loaded action to avoid issue on multisite.
 	add_action( 'plugins_loaded', 'carkeekblocks' );
 } else {
-	carkeekblocks_CL();
+	carkeekblocks_YT();
 }
