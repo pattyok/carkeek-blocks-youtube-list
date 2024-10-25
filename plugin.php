@@ -8,7 +8,7 @@
  * Primary Branch: main
  * Description: A custom post type and a block for embed a group of YouTube videos and loading them --fast!
  * Author: Patty O'Hara
- * Version: 1.1.02
+ * Version: 1.1.03
  * Author URI https://carkeekstudios.com/
  * Text Domain: carkeek-blocks
  */
