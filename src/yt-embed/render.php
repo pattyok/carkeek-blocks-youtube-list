@@ -36,15 +36,20 @@ if ( $attributes['displayAs'] == 'grid' || $attributes['context'] == 'edit' ) {
  <?php
 	foreach ( $embeds as $embed ) {
 
-		$yt    = get_field( 'yt_embed_oembed', $embed->ID, false );
+		$yt_uri    = get_field( 'yt_embed_oembed', $embed->ID, false );
 		$yt_id = '';
-		if ( strpos( $yt, 'youtu.be' ) !== false ) {
-			$yt    = explode( '/', $yt );
-			$yt_id = end( $yt );
-		} else {
-			$yt    = explode( 'v=', $yt );
-			$yt_id = $yt[1];
+		$host = wp_parse_url( $yt_uri, PHP_URL_HOST );
+
+		/* Handle Shortlinks */
+		if ( 'youtu.be' === $host ) {
+			$yt_id = ltrim( wp_parse_url( $yt_uri, PHP_URL_PATH ), '/' );
 		}
+
+		$params = wp_parse_url( $yt_uri, PHP_URL_QUERY );
+		parse_str( $params, $query );
+		$yt_id = $query['v'] ?? '';
+
+
 		$description = get_field( 'yt_embed_description', $embed->ID );
 		if ( ! empty( $description ) ) {
 			$description = '<div class="embed-description">' . $description . '</div>';
